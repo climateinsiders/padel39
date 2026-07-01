@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>Padel39</title>
+<meta name="description" content="America's next premium padel brand. More than courts." />
+<link rel="icon" type="image/png" href="favicon.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --green:#1B4332; --green-2:#2D6A4F; --rust:#BC5A2C;
+    --cream:#F3EFE7; --ink:#111111; --white:#fff;
+    --display:"Playfair Display", Georgia, serif;
+    --sans:"Archivo","Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    --edge:clamp(20px,6vw,64px);
+  }
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  html,body{ height:100%; }
+  body{
+    font-family:var(--sans); color:var(--white); background:var(--green);
+    -webkit-font-smoothing:antialiased;
+  }
+  a{ color:inherit; text-decoration:none; }
+
+  /* scroll-snap reel container */
+  .reel{
+    height:100svh; overflow-y:scroll; scroll-snap-type:y mandatory;
+    scroll-behavior:smooth; -webkit-overflow-scrolling:touch;
+  }
+  .reel::-webkit-scrollbar{ display:none; }
+  .reel{ scrollbar-width:none; }
+
+  .panel{
+    position:relative; height:100svh; scroll-snap-align:start;
+    display:flex; align-items:center; justify-content:center; overflow:hidden;
+  }
+  /* branded fallback so structure reads even before videos are added */
+  .panel:nth-child(odd){ background:linear-gradient(160deg,#205140,#16362a 60%,#10281f); }
+  .panel:nth-child(even){ background:linear-gradient(160deg,#2D6A4F,#1B4332 65%,#123326); }
+
+  .panel__stage{ position:relative; width:100%; height:100%; display:flex; align-items:center; justify-content:center; }
+  video.v{
+    width:100%; height:100%; object-fit:cover; background:#0d1f18;
+  }
+  /* subtle top+bottom scrim for legible text over any footage */
+  .scrim{
+    position:absolute; inset:0; z-index:1; pointer-events:none;
+    background:linear-gradient(to bottom, rgba(9,20,15,.55) 0%, rgba(9,20,15,0) 26%, rgba(9,20,15,0) 58%, rgba(9,20,15,.72) 100%);
+  }
+
+  /* On wide screens, present the portrait clip as a centered card on a soft field */
+  @media(min-width:860px){
+    .panel__stage{ padding:4vh 0; }
+    video.v{
+      width:auto; height:92%; aspect-ratio:9/16; border-radius:22px;
+      box-shadow:0 50px 120px -50px rgba(0,0,0,.7);
+    }
+    .scrim{ border-radius:22px; left:50%; transform:translateX(-50%); width:auto; height:92%; aspect-ratio:9/16; top:4vh; inset:auto; }
+  }
+
+  /* caption overlay */
+  .cap{
+    position:absolute; z-index:3; left:var(--edge); right:var(--edge); bottom:calc(var(--edge) + 18px);
+    text-align:center;
+  }
+  .cap .k{ font-size:11px; font-weight:600; letter-spacing:.3em; text-transform:uppercase; color:rgba(255,255,255,.85); }
+  .cap .t{ font-family:var(--display); font-weight:500; font-size:clamp(22px,4.4vw,34px); margin-top:8px; text-shadow:0 2px 24px rgba(0,0,0,.4); }
+
+  /* fixed brand + contact link */
+  .top{
+    position:fixed; z-index:40; top:0; left:0; right:0;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:18px var(--edge); padding-top:max(18px, env(safe-area-inset-top));
+    pointer-events:none;
+  }
+  .top a{ pointer-events:auto; }
+  .brand{ display:inline-flex; align-items:center; filter:drop-shadow(0 1px 10px rgba(0,0,0,.35)); }
+  .brand img{ height:30px; width:auto; display:block; }
+  @media(max-width:640px){ .brand img{ height:24px; } }
+  .top__contact{ font-size:12px; font-weight:600; letter-spacing:.06em; padding:9px 16px; border:1.5px solid rgba(255,255,255,.55); border-radius:999px; text-shadow:0 1px 10px rgba(0,0,0,.3); transition:.25s; }
+  .top__contact:hover{ background:#fff; color:var(--green); border-color:#fff; }
+
+  /* progress dots */
+  .dots{
+    position:fixed; z-index:40; right:14px; top:50%; transform:translateY(-50%);
+    display:flex; flex-direction:column; gap:11px;
+  }
+  .dots button{
+    width:7px; height:7px; border-radius:50%; border:0; padding:0; cursor:pointer;
+    background:rgba(255,255,255,.4); transition:.3s;
+  }
+  .dots button.on{ background:var(--rust); transform:scale(1.5); }
+  @media(max-width:640px){ .dots{ right:9px; } .dots button{ width:6px; height:6px; } }
+
+  /* sound toggle */
+  .sound{
+    position:fixed; z-index:40; left:var(--edge); bottom:calc(var(--edge));
+    display:flex; align-items:center; gap:9px; cursor:pointer;
+    background:rgba(9,20,15,.4); backdrop-filter:blur(6px);
+    border:1px solid rgba(255,255,255,.28); color:#fff;
+    padding:9px 15px; border-radius:999px; font-size:12px; font-weight:600; letter-spacing:.04em;
+  }
+  .sound:hover{ background:rgba(9,20,15,.6); }
+
+  /* hero panel content */
+  .hero__c{ position:absolute; z-index:3; left:var(--edge); right:var(--edge); bottom:calc(var(--edge) + 24px); }
+  .hero__k{ font-size:11px; font-weight:600; letter-spacing:.3em; text-transform:uppercase; color:rgba(255,255,255,.85); margin-bottom:16px; display:inline-flex; align-items:center; gap:12px; }
+  .hero__k::before{ content:""; width:24px; height:1px; background:var(--rust); }
+  .hero__h{ font-family:var(--display); font-weight:500; font-size:clamp(34px,7vw,64px); line-height:1.05; max-width:14ch; text-shadow:0 2px 30px rgba(0,0,0,.4); }
+  .hero__s{ margin-top:16px; font-size:clamp(15px,2.4vw,19px); font-weight:400; color:rgba(255,255,255,.9); max-width:34ch; }
+  .row{ display:flex; flex-wrap:wrap; gap:12px; margin-top:26px; }
+  .btn{ display:inline-flex; align-items:center; justify-content:center; padding:15px 26px; border-radius:999px; font-weight:600; font-size:14px; border:1.5px solid transparent; cursor:pointer; transition:.25s; }
+  .btn:hover{ transform:translateY(-2px); }
+  .btn--rust{ background:var(--rust); color:#fff; }
+  .btn--rust:hover{ background:#a94e25; }
+  .btn--ghost{ border-color:rgba(255,255,255,.55); color:#fff; }
+  .btn--ghost:hover{ background:rgba(255,255,255,.1); border-color:#fff; }
+  .btn--cream{ background:var(--cream); color:var(--green); }
+  .btn--cream:hover{ background:#fff; }
+
+  .scrollhint{ position:absolute; z-index:3; left:50%; transform:translateX(-50%); bottom:14px; font-size:10px; letter-spacing:.28em; text-transform:uppercase; color:rgba(255,255,255,.6); display:flex; flex-direction:column; align-items:center; gap:8px; }
+  .scrollhint span{ width:1px; height:26px; background:rgba(255,255,255,.35); position:relative; overflow:hidden; }
+  .scrollhint span::after{ content:""; position:absolute; left:0; top:-100%; width:100%; height:100%; background:var(--rust); animation:sd 2.2s ease-in-out infinite; }
+  @keyframes sd{ 0%{top:-100%} 60%,100%{top:100%} }
+
+  /* CTA panel */
+  .cta{ background:var(--green); text-align:center; padding:0 var(--edge); }
+  .cta__k{ font-size:11px; font-weight:600; letter-spacing:.3em; text-transform:uppercase; color:rgba(255,255,255,.7); margin-bottom:20px; }
+  .cta__h{ font-family:var(--display); font-weight:500; font-size:clamp(32px,6vw,60px); line-height:1.06; max-width:16ch; margin:0 auto 22px; }
+  .cta__s{ font-size:clamp(15px,2.2vw,18px); color:rgba(255,255,255,.8); max-width:48ch; margin:0 auto 34px; }
+  .cta .row{ justify-content:center; }
+  .cta__loc{ margin-top:44px; font-size:12px; letter-spacing:.12em; color:rgba(255,255,255,.5); text-transform:uppercase; }
+
+  @media (prefers-reduced-motion: reduce){ *{ animation:none !important; scroll-behavior:auto !important; } .btn:hover{ transform:none; } }
+</style>
+</head>
+<body>
+
+<div class="top">
+  <a href="#p0" class="brand" aria-label="Padel39"><img src="padel39-logo-white.png" alt="Padel39" /></a>
+  <a href="mailto:investors@padel39.com" class="top__contact">Get in touch</a>
+</div>
+
+<div class="dots" id="dots" aria-hidden="true"></div>
+
+<button class="sound" id="sound" type="button" aria-label="Toggle sound">
+  <span id="soundIcon">♪</span><span id="soundTxt">Sound on</span>
+</button>
+
+<main class="reel" id="reel">
+
+  <!-- 1 · HERO -->
+  <section class="panel" id="p0" data-label="Home">
+    <div class="panel__stage">
+      <video class="v" data-active muted loop playsinline preload="auto" poster="">
+        <source src="place-to-be.mp4" type="video/mp4" />
+      </video>
+    </div>
+    <div class="scrim"></div>
+    <div class="hero__c">
+      <div class="hero__k">Austin · Dallas · Expanding</div>
+      <h1 class="hero__h">America's Next Premium Padel Brand</h1>
+      <p class="hero__s">More than courts. A destination for sport, wellness and community.</p>
+      <div class="row">
+        <a class="btn btn--rust" href="mailto:investors@padel39.com">Get in touch</a>
+      </div>
+    </div>
+    <div class="scrollhint"><span></span>Scroll</div>
+  </section>
+
+  <!-- 2 -->
+  <section class="panel" data-label="Aerial">
+    <div class="panel__stage">
+      <video class="v" muted loop playsinline preload="none" poster="">
+        <source src="aerial.mp4" type="video/mp4" />
+      </video>
+    </div>
+    <div class="scrim"></div>
+    <div class="cap"><div class="k">The Flagship</div><div class="t">Aerial view, East Austin</div></div>
+  </section>
+
+  <!-- 3 -->
+  <section class="panel" data-label="Largest club">
+    <div class="panel__stage">
+      <video class="v" muted loop playsinline preload="none" poster="">
+        <source src="largest-club.mp4" type="video/mp4" />
+      </video>
+    </div>
+    <div class="scrim"></div>
+    <div class="cap"><div class="k">Texas</div><div class="t">The largest padel club in the state</div></div>
+  </section>
+
+  <!-- 4 -->
+  <section class="panel" data-label="Community">
+    <div class="panel__stage">
+      <video class="v" muted loop playsinline preload="none" poster="">
+        <source src="full-club.mp4" type="video/mp4" />
+      </video>
+    </div>
+    <div class="scrim"></div>
+    <div class="cap"><div class="k">Community</div><div class="t">The full club vibe</div></div>
+  </section>
+
+  <!-- 5 -->
+  <section class="panel" data-label="Sports bar">
+    <div class="panel__stage">
+      <video class="v" muted loop playsinline preload="none" poster="">
+        <source src="sports-bar.mp4" type="video/mp4" />
+      </video>
+    </div>
+    <div class="scrim"></div>
+    <div class="cap"><div class="k">Food &amp; Beverage</div><div class="t">A sports bar worth staying for</div></div>
+  </section>
+
+  <!-- 6 · CTA -->
+  <section class="panel cta" id="cta" data-label="Contact">
+    <div>
+      <div class="cta__k">Let's Talk</div>
+      <h2 class="cta__h">Building America's leading premium padel network.</h2>
+      <p class="cta__s">Three clubs today, thirty plus by 2030. We are opening the round to a small circle of partners who see the same future we do.</p>
+      <div class="row">
+        <a class="btn btn--cream" href="mailto:investors@padel39.com">Get in touch</a>
+      </div>
+      <div class="cta__loc">North Austin · East Austin · Dallas</div>
+    </div>
+  </section>
+
+</main>
+
+<script>
+  const reel   = document.getElementById('reel');
+  const panels = [...document.querySelectorAll('.panel')];
+  const videos = [...document.querySelectorAll('video.v')];
+  let muted = true;
+
+  // Build progress dots
+  const dotsWrap = document.getElementById('dots');
+  panels.forEach((p, i) => {
+    const b = document.createElement('button');
+    b.setAttribute('aria-label', p.dataset.label || ('Section ' + (i+1)));
+    b.addEventListener('click', () => p.scrollIntoView({ behavior:'smooth' }));
+    dotsWrap.appendChild(b);
+  });
+  const dots = [...dotsWrap.children];
+
+  // Play the video in view, pause the rest. Update dots.
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      const panel = e.target;
+      const idx = panels.indexOf(panel);
+      const vid = panel.querySelector('video.v');
+      if (e.isIntersecting && e.intersectionRatio > 0.6){
+        dots.forEach((d,i) => d.classList.toggle('on', i === idx));
+        if (vid){
+          vid.muted = muted;
+          const play = vid.play();
+          if (play && play.catch) play.catch(()=>{});
+        }
+      } else if (vid){
+        vid.pause();
+      }
+    });
+  }, { root: reel, threshold:[0, 0.6, 1] });
+  panels.forEach(p => io.observe(p));
+
+  // Global sound toggle
+  const soundBtn = document.getElementById('sound');
+  const soundTxt = document.getElementById('soundTxt');
+  const soundIcon= document.getElementById('soundIcon');
+  soundBtn.addEventListener('click', () => {
+    muted = !muted;
+    videos.forEach(v => v.muted = muted);
+    soundTxt.textContent = muted ? 'Sound on' : 'Sound off';
+    soundIcon.textContent = muted ? '♪' : '✕';
+    if (!muted){
+      const active = panels.find((p,i) => dots[i].classList.contains('on'));
+      const v = active && active.querySelector('video.v');
+      if (v){ v.muted = false; const pl = v.play(); if (pl && pl.catch) pl.catch(()=>{}); }
+    }
+  });
+
+  // Kick the first video
+  window.addEventListener('load', () => {
+    const first = videos[0];
+    if (first){ const pl = first.play(); if (pl && pl.catch) pl.catch(()=>{}); }
+  });
+</script>
+</body>
+</html>
