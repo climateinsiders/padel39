@@ -413,21 +413,31 @@
   }, { root: reel, threshold:[0, 0.6, 1] });
   panels.forEach(p => io.observe(p));
 
-  // Global sound toggle
+  // Sound: default to ON. Browsers block audio autoplay until a gesture, so we
+  // start muted (so the clip plays) and unmute on the first user interaction.
   const soundBtn = document.getElementById('sound');
   const soundTxt = document.getElementById('soundTxt');
   const soundIcon= document.getElementById('soundIcon');
-  soundBtn.addEventListener('click', () => {
-    muted = !muted;
+  function applySound(){
     videos.forEach(v => v.muted = muted);
     soundTxt.textContent = muted ? 'Sound on' : 'Sound off';
     soundIcon.textContent = muted ? '♪' : '✕';
     if (!muted){
-      const active = panels.find((p,i) => dots[i].classList.contains('on'));
+      const active = panels.find((p,i) => dots[i].classList.contains('on')) || panels[0];
       const v = active && active.querySelector('video.v');
       if (v){ v.muted = false; const pl = v.play(); if (pl && pl.catch) pl.catch(()=>{}); }
     }
-  });
+  }
+  soundBtn.addEventListener('click', () => { muted = !muted; applySound(); });
+
+  // Turn sound on at the first interaction (unless that interaction is the toggle itself)
+  const GESTURES = ['pointerdown','touchstart','keydown','wheel'];
+  function autoUnmute(e){
+    const onToggle = e && e.target && e.target.closest && e.target.closest('#sound');
+    if (!onToggle && muted){ muted = false; applySound(); }
+    GESTURES.forEach(ev => window.removeEventListener(ev, autoUnmute));
+  }
+  GESTURES.forEach(ev => window.addEventListener(ev, autoUnmute, { passive:true }));
 
   // Kick the first video
   window.addEventListener('load', () => {
