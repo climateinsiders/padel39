@@ -2,7 +2,7 @@
 
 Single-page video microsite for Padel39. A full-screen, scroll-snap video reel served from GitHub Pages.
 
-**Live site:** https://climateinsiders.github.io/padel39/
+**Live site:** https://padel39.us (custom domain; also served from https://climateinsiders.github.io/padel39/)
 
 ## How it works
 
