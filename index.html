@@ -137,7 +137,8 @@
   .panel.map{ background:var(--cream); color:var(--ink); }
   .map__wrap{ width:100%; height:100%; display:flex; align-items:center; gap:clamp(24px,4vw,64px); padding:var(--edge); }
   .map__left{ flex:1 1 52%; min-width:0; }
-  .usmap{ width:100%; height:auto; display:block; filter:drop-shadow(0 24px 40px rgba(0,0,0,.09)); }
+  .usmap{ width:100%; aspect-ratio:1400/781; height:auto; display:block; filter:drop-shadow(0 24px 40px rgba(0,0,0,.09)); }
+  .map__hint{ margin-top:10px; text-align:center; font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:rgba(17,17,17,.4); }
   .map__right{ flex:1 1 46%; max-width:560px; }
   .map__k{ font-size:11px; font-weight:700; letter-spacing:.3em; text-transform:uppercase; color:var(--rust); }
   .map__h{ font-family:var(--display); font-weight:600; font-size:clamp(28px,4vw,48px); line-height:1.04; margin:8px 0 20px; color:var(--ink); }
@@ -153,7 +154,8 @@
     .map__wrap{ flex-direction:column; align-items:stretch; justify-content:flex-start; gap:12px;
       padding:calc(env(safe-area-inset-top) + 70px) var(--edge) calc(var(--edge)); overflow:auto; }
     .map__left{ flex:none; }
-    .usmap{ max-height:28svh; width:auto; margin:0 auto; }
+    .usmap{ max-height:30svh; width:100%; margin:0 auto; }
+    .map__hint{ display:none; }
     .map__h{ margin:6px 0 12px; }
     .phase{ padding:11px 0; }
   }
@@ -313,7 +315,8 @@
   <section class="panel map light" data-label="How we scale">
     <div class="map__wrap">
       <div class="map__left">
-        <img class="usmap" src="us-map.svg" alt="Map of the United States showing Padel39 expansion by phase" />
+        <object class="usmap" type="image/svg+xml" data="us-map.svg" aria-label="Map of the United States showing Padel39 expansion by phase, radiating from Texas"></object>
+        <p class="map__hint">Hover a pin to explore each market</p>
       </div>
       <div class="map__right">
         <div class="map__k">The Roadmap</div>
@@ -333,7 +336,6 @@
           <div class="phase__b">
             <div class="phase__t">Phase 2 · 2028</div>
             <div class="phase__n"><b style="color:var(--p2)">13 clubs</b> · Sun Belt + National</div>
-            <div class="phase__d">2027: South Austin, plus LOIs in Central Dallas, Stamford and Houston Heights. 2028: San Diego, Atlanta, Nashville, Charlotte, Denver. ClubOS live across all clubs early 2027.</div>
           </div>
         </div>
 
