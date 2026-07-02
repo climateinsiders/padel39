@@ -397,6 +397,9 @@
             if (!vid.muted){ vid.muted = true; vid.play().catch(()=>{}); }
           });
         }
+        // warm the next clip so it's already buffering by the time we scroll to it
+        const nextVid = panels[idx+1] && panels[idx+1].querySelector('video.v');
+        if (nextVid && nextVid.preload !== 'auto'){ nextVid.preload = 'auto'; nextVid.load(); }
       } else if (vid){
         vid.pause();
       }
