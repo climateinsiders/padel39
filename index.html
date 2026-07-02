@@ -54,7 +54,13 @@
   /* On wide screens, present the portrait clip as a centered card on a soft field */
   @media(min-width:860px){
     .panel__stage{ padding:4vh 0; }
+    /* soft darker field behind the portrait card, biased to the left for depth */
+    .panel__stage::before{
+      content:""; position:absolute; inset:0; z-index:0; pointer-events:none;
+      background:radial-gradient(62% 72% at 41% 50%, rgba(3,12,9,.46), rgba(3,12,9,0) 66%);
+    }
     .media{
+      position:relative; z-index:1;
       width:auto; height:92%; aspect-ratio:9/16; border-radius:22px;
       box-shadow:0 50px 120px -50px rgba(0,0,0,.7);
     }
