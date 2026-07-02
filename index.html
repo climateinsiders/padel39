@@ -13,6 +13,7 @@
   :root{
     --green:#1B4332; --green-2:#2D6A4F; --rust:#BC5A2C;
     --cream:#F3EFE7; --ink:#111111; --white:#fff;
+    --p1:#40916C; --p2:#BC5A2C; --p3:#1B4332;
     --display:"Playfair Display", Georgia, serif;
     --sans:"Archivo","Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
     --edge:clamp(20px,6vw,64px);
@@ -37,28 +38,26 @@
     position:relative; height:100svh; scroll-snap-align:start;
     display:flex; align-items:center; justify-content:center; overflow:hidden;
   }
-  /* branded fallback so structure reads even before videos are added */
+  /* branded fallback so structure reads even before videos load */
   .panel:nth-child(odd){ background:linear-gradient(160deg,#205140,#16362a 60%,#10281f); }
   .panel:nth-child(even){ background:linear-gradient(160deg,#2D6A4F,#1B4332 65%,#123326); }
 
   .panel__stage{ position:relative; width:100%; height:100%; display:flex; align-items:center; justify-content:center; }
-  video.v{
-    width:100%; height:100%; object-fit:cover; background:#0d1f18;
-  }
-  /* subtle top+bottom scrim for legible text over any footage */
+  /* .media is the exact box the video fills; the scrim matches it 1:1 so the
+     overlay always aligns with the footage (no offset on wide screens) */
+  .media{ position:relative; width:100%; height:100%; overflow:hidden; background:#0d1f18; }
+  video.v{ width:100%; height:100%; object-fit:cover; display:block; }
   .scrim{
     position:absolute; inset:0; z-index:1; pointer-events:none;
     background:linear-gradient(to bottom, rgba(9,20,15,.55) 0%, rgba(9,20,15,0) 26%, rgba(9,20,15,0) 58%, rgba(9,20,15,.72) 100%);
   }
-
   /* On wide screens, present the portrait clip as a centered card on a soft field */
   @media(min-width:860px){
     .panel__stage{ padding:4vh 0; }
-    video.v{
+    .media{
       width:auto; height:92%; aspect-ratio:9/16; border-radius:22px;
       box-shadow:0 50px 120px -50px rgba(0,0,0,.7);
     }
-    .scrim{ border-radius:22px; left:50%; transform:translateX(-50%); width:auto; height:92%; aspect-ratio:9/16; top:4vh; inset:auto; }
   }
 
   /* caption overlay */
@@ -77,9 +76,9 @@
     pointer-events:none;
   }
   .top a{ pointer-events:auto; }
-  .brand{ display:inline-flex; align-items:center; filter:drop-shadow(0 1px 10px rgba(0,0,0,.35)); }
-  .brand img{ height:30px; width:auto; display:block; }
-  @media(max-width:640px){ .brand img{ height:24px; } }
+  .brand{ display:inline-flex; align-items:center; filter:drop-shadow(0 1px 12px rgba(0,0,0,.4)); transition:filter .3s; }
+  .brand img{ height:48px; width:auto; display:block; transition:filter .3s; }
+  @media(max-width:640px){ .brand img{ height:37px; } }
   .top__contact{ font-size:12px; font-weight:600; letter-spacing:.06em; padding:9px 16px; border:1.5px solid rgba(255,255,255,.55); border-radius:999px; text-shadow:0 1px 10px rgba(0,0,0,.3); transition:.25s; }
   .top__contact:hover{ background:#fff; color:var(--green); border-color:#fff; }
 
@@ -97,7 +96,7 @@
 
   /* sound toggle */
   .sound{
-    position:fixed; z-index:40; left:var(--edge); bottom:calc(var(--edge));
+    position:fixed; z-index:40; left:var(--edge); bottom:var(--edge);
     display:flex; align-items:center; gap:9px; cursor:pointer;
     background:rgba(9,20,15,.4); backdrop-filter:blur(6px);
     border:1px solid rgba(255,255,255,.28); color:#fff;
@@ -105,8 +104,16 @@
   }
   .sound:hover{ background:rgba(9,20,15,.6); }
 
+  /* light-ui: when a light (cream) panel is active, flip the fixed chrome to dark */
+  body.light-ui .brand{ filter:none; }
+  body.light-ui .brand img{ filter:invert(1); }
+  body.light-ui .top__contact{ color:var(--ink); border-color:rgba(17,17,17,.42); text-shadow:none; }
+  body.light-ui .top__contact:hover{ background:var(--ink); color:var(--cream); border-color:var(--ink); }
+  body.light-ui .dots button{ background:rgba(17,17,17,.25); }
+  body.light-ui .dots button.on{ background:var(--rust); }
+
   /* hero panel content */
-  .hero__c{ position:absolute; z-index:3; left:var(--edge); right:var(--edge); bottom:calc(var(--edge) + 24px); }
+  .hero__c{ position:absolute; z-index:3; left:var(--edge); right:var(--edge); bottom:calc(var(--edge) + 54px); }
   .hero__k{ font-size:11px; font-weight:600; letter-spacing:.3em; text-transform:uppercase; color:rgba(255,255,255,.85); margin-bottom:16px; display:inline-flex; align-items:center; gap:12px; }
   .hero__k::before{ content:""; width:24px; height:1px; background:var(--rust); }
   .hero__h{ font-family:var(--display); font-weight:500; font-size:clamp(34px,7vw,64px); line-height:1.05; max-width:14ch; text-shadow:0 2px 30px rgba(0,0,0,.4); }
@@ -125,6 +132,31 @@
   .scrollhint span{ width:1px; height:26px; background:rgba(255,255,255,.35); position:relative; overflow:hidden; }
   .scrollhint span::after{ content:""; position:absolute; left:0; top:-100%; width:100%; height:100%; background:var(--rust); animation:sd 2.2s ease-in-out infinite; }
   @keyframes sd{ 0%{top:-100%} 60%,100%{top:100%} }
+
+  /* MAP / phases panel (light) — .panel.map to beat the nth-child fallback bg */
+  .panel.map{ background:var(--cream); color:var(--ink); }
+  .map__wrap{ width:100%; height:100%; display:flex; align-items:center; gap:clamp(24px,4vw,64px); padding:var(--edge); }
+  .map__left{ flex:1 1 52%; min-width:0; }
+  .usmap{ width:100%; height:auto; display:block; filter:drop-shadow(0 24px 40px rgba(0,0,0,.09)); }
+  .map__right{ flex:1 1 46%; max-width:560px; }
+  .map__k{ font-size:11px; font-weight:700; letter-spacing:.3em; text-transform:uppercase; color:var(--rust); }
+  .map__h{ font-family:var(--display); font-weight:600; font-size:clamp(28px,4vw,48px); line-height:1.04; margin:8px 0 20px; color:var(--ink); }
+  .phase{ display:flex; gap:14px; padding:15px 0; border-top:1px solid rgba(17,17,17,.12); }
+  .phase:last-child{ border-bottom:1px solid rgba(17,17,17,.12); }
+  .phase__dot{ flex:none; width:14px; height:14px; border-radius:50%; margin-top:6px; }
+  .phase__b{ flex:1; min-width:0; }
+  .phase__t{ font-size:11px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:rgba(17,17,17,.5); }
+  .phase__n{ font-family:var(--display); font-weight:600; font-size:clamp(19px,2.2vw,25px); margin:1px 0 5px; color:var(--ink); }
+  .phase__n b{ font-weight:600; }
+  .phase__d{ font-size:13px; line-height:1.5; color:rgba(17,17,17,.72); }
+  @media(max-width:860px){
+    .map__wrap{ flex-direction:column; align-items:stretch; justify-content:flex-start; gap:12px;
+      padding:calc(env(safe-area-inset-top) + 70px) var(--edge) calc(var(--edge)); overflow:auto; }
+    .map__left{ flex:none; }
+    .usmap{ max-height:28svh; width:auto; margin:0 auto; }
+    .map__h{ margin:6px 0 12px; }
+    .phase{ padding:11px 0; }
+  }
 
   /* CTA panel */
   .cta{ background:var(--green); text-align:center; padding:0 var(--edge); }
@@ -155,11 +187,13 @@
   <!-- 1 · HERO -->
   <section class="panel" id="p0" data-label="Home">
     <div class="panel__stage">
-      <video class="v" data-active muted loop playsinline preload="auto" poster="">
-        <source src="place-to-be.mp4" type="video/mp4" />
-      </video>
+      <div class="media">
+        <video class="v" data-active muted loop playsinline preload="auto" poster="">
+          <source src="place-to-be.mp4" type="video/mp4" />
+        </video>
+        <div class="scrim"></div>
+      </div>
     </div>
-    <div class="scrim"></div>
     <div class="hero__c">
       <div class="hero__k">Austin · Dallas · Expanding</div>
       <h1 class="hero__h">America's Next Premium Padel Brand</h1>
@@ -171,56 +205,130 @@
     <div class="scrollhint"><span></span>Scroll</div>
   </section>
 
-  <!-- 2 -->
+  <!-- 2 · Amenities -->
+  <section class="panel" data-label="Amenities">
+    <div class="panel__stage">
+      <div class="media">
+        <video class="v" muted loop playsinline preload="none" poster="">
+          <source src="amenities.mp4" type="video/mp4" />
+        </video>
+        <div class="scrim"></div>
+      </div>
+    </div>
+    <div class="cap"><div class="k">The Club</div><div class="t">The place to be in Austin, all summer</div></div>
+  </section>
+
+  <!-- 3 · Aerial -->
   <section class="panel" data-label="Aerial">
     <div class="panel__stage">
-      <video class="v" muted loop playsinline preload="none" poster="">
-        <source src="aerial.mp4" type="video/mp4" />
-      </video>
+      <div class="media">
+        <video class="v" muted loop playsinline preload="none" poster="">
+          <source src="aerial.mp4" type="video/mp4" />
+        </video>
+        <div class="scrim"></div>
+      </div>
     </div>
-    <div class="scrim"></div>
     <div class="cap"><div class="k">The Flagship</div><div class="t">Aerial view, East Austin</div></div>
   </section>
 
-  <!-- 3 -->
+  <!-- 4 · Largest club -->
   <section class="panel" data-label="Largest club">
     <div class="panel__stage">
-      <video class="v" muted loop playsinline preload="none" poster="">
-        <source src="largest-club.mp4" type="video/mp4" />
-      </video>
+      <div class="media">
+        <video class="v" muted loop playsinline preload="none" poster="">
+          <source src="largest-club.mp4" type="video/mp4" />
+        </video>
+        <div class="scrim"></div>
+      </div>
     </div>
-    <div class="scrim"></div>
     <div class="cap"><div class="k">Texas</div><div class="t">The largest padel club in the state</div></div>
   </section>
 
-  <!-- 4 -->
+  <!-- 5 · Community -->
   <section class="panel" data-label="Community">
     <div class="panel__stage">
-      <video class="v" muted loop playsinline preload="none" poster="">
-        <source src="full-club.mp4" type="video/mp4" />
-      </video>
+      <div class="media">
+        <video class="v" muted loop playsinline preload="none" poster="">
+          <source src="full-club.mp4" type="video/mp4" />
+        </video>
+        <div class="scrim"></div>
+      </div>
     </div>
-    <div class="scrim"></div>
     <div class="cap"><div class="k">Community</div><div class="t">The full club vibe</div></div>
   </section>
 
-  <!-- 5 -->
+  <!-- 6 · Sports bar -->
   <section class="panel" data-label="Sports bar">
     <div class="panel__stage">
-      <video class="v" muted loop playsinline preload="none" poster="">
-        <source src="sports-bar.mp4" type="video/mp4" />
-      </video>
+      <div class="media">
+        <video class="v" muted loop playsinline preload="none" poster="">
+          <source src="sports-bar.mp4" type="video/mp4" />
+        </video>
+        <div class="scrim"></div>
+      </div>
     </div>
-    <div class="scrim"></div>
     <div class="cap"><div class="k">Food &amp; Beverage</div><div class="t">A sports bar worth staying for</div></div>
   </section>
 
-  <!-- 6 · CTA -->
+  <!-- 7 · Brand collabs -->
+  <section class="panel" data-label="Brand collabs">
+    <div class="panel__stage">
+      <div class="media">
+        <video class="v" muted loop playsinline preload="none" poster="">
+          <source src="brand-collab.mp4" type="video/mp4" />
+        </video>
+        <div class="scrim"></div>
+      </div>
+    </div>
+    <div class="cap"><div class="k">Brand Collabs</div><div class="t">Speed, precision and power. On and off the court.</div></div>
+  </section>
+
+  <!-- 8 · How we scale (map) -->
+  <section class="panel map light" data-label="How we scale">
+    <div class="map__wrap">
+      <div class="map__left">
+        <img class="usmap" src="us-map.svg" alt="Map of the United States showing Padel39 expansion by phase" />
+      </div>
+      <div class="map__right">
+        <div class="map__k">The Roadmap</div>
+        <h2 class="map__h">How we scale</h2>
+
+        <div class="phase">
+          <span class="phase__dot" style="background:var(--p1)"></span>
+          <div class="phase__b">
+            <div class="phase__t">Phase 1 · By 2026</div>
+            <div class="phase__n"><b style="color:var(--p1)">3 clubs</b> · Texas Foundation</div>
+            <div class="phase__d">North Austin, East Austin, Carrollton (North Dallas). Real estate locked in all three TX markets. Operating playbook proven, luxury partners secured.</div>
+          </div>
+        </div>
+
+        <div class="phase">
+          <span class="phase__dot" style="background:var(--p2)"></span>
+          <div class="phase__b">
+            <div class="phase__t">Phase 2 · By 2028</div>
+            <div class="phase__n"><b style="color:var(--p2)">13 clubs</b> · Sun Belt + National</div>
+            <div class="phase__d">2027: South Austin, plus LOIs in Central Dallas, Stamford and Houston Heights. 2028: San Diego, Atlanta, Nashville, Charlotte, Denver. ClubOS live across all clubs early 2027.</div>
+          </div>
+        </div>
+
+        <div class="phase">
+          <span class="phase__dot" style="background:var(--p3)"></span>
+          <div class="phase__b">
+            <div class="phase__t">Phase 3 · By 2030</div>
+            <div class="phase__n"><b style="color:var(--p3)">29 clubs</b> · National at Scale</div>
+            <div class="phase__d">Next in the pool: Washington DC, Boston, Las Vegas and more. 307 courts, $145M revenue, 40%+ net margin.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9 · CTA -->
   <section class="panel cta" id="cta" data-label="Contact">
     <div>
       <div class="cta__k">Let's Talk</div>
       <h2 class="cta__h">Building America's leading premium padel network.</h2>
-      <p class="cta__s">Three clubs today, thirty plus by 2030. We are opening the round to a small circle of partners who see the same future we do.</p>
+      <p class="cta__s">Three clubs today, twenty-nine by 2030. We are opening the round to a small circle of partners who see the same future we do.</p>
       <div class="row">
         <a class="btn btn--cream" href="mailto:investors@padel39.com">Get in touch</a>
       </div>
@@ -246,7 +354,7 @@
   });
   const dots = [...dotsWrap.children];
 
-  // Play the video in view, pause the rest. Update dots.
+  // Play the video in view, pause the rest. Update dots + light-ui state.
   const io = new IntersectionObserver((entries) => {
     entries.forEach(e => {
       const panel = e.target;
@@ -254,6 +362,7 @@
       const vid = panel.querySelector('video.v');
       if (e.isIntersecting && e.intersectionRatio > 0.6){
         dots.forEach((d,i) => d.classList.toggle('on', i === idx));
+        document.body.classList.toggle('light-ui', panel.classList.contains('light'));
         if (vid){
           vid.muted = muted;
           const play = vid.play();
