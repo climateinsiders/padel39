@@ -190,7 +190,7 @@
   <section class="panel" id="p0" data-label="Home">
     <div class="panel__stage">
       <div class="media">
-        <video class="v" data-active muted loop playsinline preload="auto" poster="">
+        <video class="v" data-active muted loop playsinline preload="auto" poster="place-to-be-poster.jpg">
           <source src="place-to-be.mp4" type="video/mp4" />
         </video>
         <div class="scrim"></div>
@@ -211,7 +211,7 @@
   <section class="panel" data-label="Amenities">
     <div class="panel__stage">
       <div class="media">
-        <video class="v" muted loop playsinline preload="none" poster="">
+        <video class="v" muted loop playsinline preload="none" poster="amenities-poster.jpg">
           <source src="amenities.mp4" type="video/mp4" />
         </video>
         <div class="scrim"></div>
@@ -224,7 +224,7 @@
   <section class="panel" data-label="Aerial">
     <div class="panel__stage">
       <div class="media">
-        <video class="v" muted loop playsinline preload="none" poster="">
+        <video class="v" muted loop playsinline preload="none" poster="aerial-poster.jpg">
           <source src="aerial.mp4" type="video/mp4" />
         </video>
         <div class="scrim"></div>
@@ -237,7 +237,7 @@
   <section class="panel" data-label="Largest club">
     <div class="panel__stage">
       <div class="media">
-        <video class="v" muted loop playsinline preload="none" poster="">
+        <video class="v" muted loop playsinline preload="none" poster="largest-club-poster.jpg">
           <source src="largest-club.mp4" type="video/mp4" />
         </video>
         <div class="scrim"></div>
@@ -250,7 +250,7 @@
   <section class="panel" data-label="Community">
     <div class="panel__stage">
       <div class="media">
-        <video class="v" muted loop playsinline preload="none" poster="">
+        <video class="v" muted loop playsinline preload="none" poster="full-club-poster.jpg">
           <source src="full-club.mp4" type="video/mp4" />
         </video>
         <div class="scrim"></div>
@@ -263,7 +263,7 @@
   <section class="panel" data-label="Sports bar">
     <div class="panel__stage">
       <div class="media">
-        <video class="v" muted loop playsinline preload="none" poster="">
+        <video class="v" muted loop playsinline preload="none" poster="sports-bar-poster.jpg">
           <source src="sports-bar.mp4" type="video/mp4" />
         </video>
         <div class="scrim"></div>
@@ -276,7 +276,7 @@
   <section class="panel" data-label="Tournaments">
     <div class="panel__stage">
       <div class="media">
-        <video class="v" muted loop playsinline preload="none" poster="">
+        <video class="v" muted loop playsinline preload="none" poster="tournaments-poster.jpg">
           <source src="tournaments.mp4" type="video/mp4" />
         </video>
         <div class="scrim"></div>
@@ -289,7 +289,7 @@
   <section class="panel" data-label="Brand collabs">
     <div class="panel__stage">
       <div class="media">
-        <video class="v" muted loop playsinline preload="none" poster="">
+        <video class="v" muted loop playsinline preload="none" poster="lamborghini_brandcollab-poster.jpg">
           <source src="lamborghini_brandcollab.mp4" type="video/mp4" />
         </video>
         <div class="scrim"></div>
@@ -302,7 +302,7 @@
   <section class="panel" data-label="National scaling">
     <div class="panel__stage">
       <div class="media">
-        <video class="v" muted loop playsinline preload="none" poster="">
+        <video class="v" muted loop playsinline preload="none" poster="national-scaling-poster.jpg">
           <source src="national-scaling.mp4" type="video/mp4" />
         </video>
         <div class="scrim"></div>
@@ -316,7 +316,6 @@
     <div class="map__wrap">
       <div class="map__left">
         <object class="usmap" type="image/svg+xml" data="us-map.svg" aria-label="Map of the United States showing Padel39 expansion by phase, radiating from Texas"></object>
-        <p class="map__hint">Hover a pin to explore each market</p>
       </div>
       <div class="map__right">
         <div class="map__k">The Roadmap</div>
@@ -393,7 +392,10 @@
         if (vid){
           vid.muted = muted;
           const play = vid.play();
-          if (play && play.catch) play.catch(()=>{});
+          if (play && play.catch) play.catch(() => {
+            // if an unmuted autoplay is blocked, fall back to muted so it never stalls on a still
+            if (!vid.muted){ vid.muted = true; vid.play().catch(()=>{}); }
+          });
         }
       } else if (vid){
         vid.pause();
