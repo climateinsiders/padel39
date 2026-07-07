@@ -8,15 +8,25 @@
 <link rel="icon" type="image/png" href="favicon.png" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Playfair+Display:ital,wght@0,600;0,700;1,700&display=swap" rel="stylesheet" />
 <style>
   :root{
     --green:#1B4332; --green-2:#2D6A4F; --rust:#BC5A2C;
     --cream:#F3EFE7; --ink:#111111; --white:#fff;
     --p1:#40916C; --p2:#BC5A2C; --p3:#1B4332;
     --display:"Playfair Display", Georgia, serif;
-    --sans:"Archivo","Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    --sans:"Montserrat",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
     --edge:clamp(20px,6vw,64px);
+    /* Brand type scale (Playfair Display + Montserrat). px values are the desktop
+       targets from the brand guide, clamped down for smaller screens. */
+    --fs-title:clamp(32px,4.6vw,42px);       /* Title: Playfair Display Bold 42 */
+    --fs-heading:clamp(26px,3.4vw,32px);     /* Heading: Playfair Display Bold 32 */
+    --fs-subtitle:clamp(17px,2.1vw,24px);    /* Subtitle: Montserrat Regular 24 */
+    --fs-subheading:clamp(16px,1.6vw,20px);  /* Subheading: Montserrat SemiBold 20 */
+    --fs-section:clamp(12px,1.15vw,16px);    /* Section header: Montserrat Bold 16, caps */
+    --fs-body:clamp(12px,1.05vw,13px);       /* Body: Montserrat Regular 12 */
+    --fs-quote:clamp(18px,1.9vw,22px);       /* Quote: Playfair Display Italic 22 */
+    --fs-caption:9px;                        /* Caption: Montserrat Regular 9 */
   }
   *{ box-sizing:border-box; margin:0; padding:0; }
   html,body{ height:100%; }
@@ -71,13 +81,13 @@
     position:absolute; z-index:3; left:var(--edge); right:var(--edge); bottom:calc(var(--edge) + 18px);
     text-align:center;
   }
-  .cap .k{ font-size:11px; font-weight:600; letter-spacing:.3em; text-transform:uppercase; color:rgba(255,255,255,.85); }
-  .cap .t{ font-family:var(--display); font-weight:500; font-size:clamp(22px,4.4vw,34px); margin-top:8px; text-shadow:0 2px 24px rgba(0,0,0,.4); }
+  .cap .k{ font-size:var(--fs-section); font-weight:700; letter-spacing:.24em; text-transform:uppercase; color:rgba(255,255,255,.9); }
+  .cap .t{ font-family:var(--display); font-weight:700; font-size:var(--fs-heading); margin-top:8px; text-shadow:0 2px 24px rgba(0,0,0,.4); }
   /* mobile: lift caption clear of the sound button and make it larger */
   @media(max-width:640px){
     .cap{ bottom:calc(env(safe-area-inset-bottom) + 88px); }
-    .cap .k{ font-size:12px; margin-bottom:2px; }
-    .cap .t{ font-size:clamp(28px,7.6vw,36px); font-weight:600; margin-top:10px; text-shadow:0 2px 26px rgba(0,0,0,.55); }
+    .cap .k{ font-size:13px; margin-bottom:2px; }
+    .cap .t{ font-size:clamp(26px,7vw,32px); font-weight:700; margin-top:10px; text-shadow:0 2px 26px rgba(0,0,0,.55); }
   }
 
   /* fixed brand + contact link */
@@ -136,10 +146,10 @@
 
   /* hero panel content */
   .hero__c{ position:absolute; z-index:3; left:var(--edge); right:var(--edge); bottom:calc(var(--edge) + 54px); }
-  .hero__k{ font-size:11px; font-weight:600; letter-spacing:.3em; text-transform:uppercase; color:rgba(255,255,255,.85); margin-bottom:16px; display:inline-flex; align-items:center; gap:12px; }
+  .hero__k{ font-size:var(--fs-section); font-weight:700; letter-spacing:.24em; text-transform:uppercase; color:rgba(255,255,255,.85); margin-bottom:16px; display:inline-flex; align-items:center; gap:12px; }
   .hero__k::before{ content:""; width:24px; height:1px; background:var(--rust); }
-  .hero__h{ font-family:var(--display); font-weight:500; font-size:clamp(34px,7vw,64px); line-height:1.05; max-width:14ch; text-shadow:0 2px 30px rgba(0,0,0,.4); }
-  .hero__s{ margin-top:16px; font-size:clamp(15px,2.4vw,19px); font-weight:400; color:rgba(255,255,255,.9); max-width:34ch; }
+  .hero__h{ font-family:var(--display); font-weight:700; font-size:var(--fs-title); line-height:1.06; max-width:14ch; text-shadow:0 2px 30px rgba(0,0,0,.4); }
+  .hero__s{ margin-top:16px; font-size:var(--fs-subtitle); font-weight:400; color:rgba(255,255,255,.9); max-width:36ch; }
   .row{ display:flex; flex-wrap:wrap; gap:12px; margin-top:26px; }
   .btn{ display:inline-flex; align-items:center; justify-content:center; padding:15px 26px; border-radius:999px; font-weight:600; font-size:14px; border:1.5px solid transparent; cursor:pointer; transition:.25s; }
   .btn:hover{ transform:translateY(-2px); }
@@ -162,16 +172,16 @@
   .usmap{ width:100%; aspect-ratio:1400/781; height:auto; display:block; filter:drop-shadow(0 24px 40px rgba(0,0,0,.09)); }
   .map__hint{ margin-top:10px; text-align:center; font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:rgba(17,17,17,.4); }
   .map__right{ flex:1 1 46%; max-width:560px; }
-  .map__k{ font-size:11px; font-weight:700; letter-spacing:.3em; text-transform:uppercase; color:var(--rust); }
-  .map__h{ font-family:var(--display); font-weight:600; font-size:clamp(28px,4vw,48px); line-height:1.04; margin:8px 0 20px; color:var(--ink); }
+  .map__k{ font-size:var(--fs-section); font-weight:700; letter-spacing:.24em; text-transform:uppercase; color:var(--rust); }
+  .map__h{ font-family:var(--display); font-weight:700; font-size:var(--fs-heading); line-height:1.05; margin:8px 0 20px; color:var(--ink); }
   .phase{ display:flex; gap:14px; padding:15px 0; border-top:1px solid rgba(17,17,17,.12); }
   .phase:last-child{ border-bottom:1px solid rgba(17,17,17,.12); }
   .phase__dot{ flex:none; width:14px; height:14px; border-radius:50%; margin-top:6px; }
   .phase__b{ flex:1; min-width:0; }
-  .phase__t{ font-size:11px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:rgba(17,17,17,.5); }
-  .phase__n{ font-family:var(--display); font-weight:600; font-size:clamp(19px,2.2vw,25px); margin:1px 0 5px; color:var(--ink); }
-  .phase__n b{ font-weight:600; }
-  .phase__d{ font-size:13px; line-height:1.5; color:rgba(17,17,17,.72); }
+  .phase__t{ font-size:clamp(11px,0.95vw,13px); font-weight:700; letter-spacing:.16em; text-transform:uppercase; color:rgba(17,17,17,.5); }
+  .phase__n{ font-family:var(--sans); font-weight:600; font-size:var(--fs-subheading); margin:2px 0 5px; color:var(--ink); }
+  .phase__n b{ font-weight:700; }
+  .phase__d{ font-size:var(--fs-body); line-height:1.55; color:rgba(17,17,17,.72); }
   @media(max-width:860px){
     .map__wrap{ flex-direction:column; align-items:stretch; justify-content:flex-start; gap:12px;
       padding:calc(env(safe-area-inset-top) + 70px) var(--edge) calc(var(--edge)); overflow:auto; }
@@ -184,11 +194,11 @@
 
   /* CTA panel */
   .cta{ background:var(--green); text-align:center; padding:0 var(--edge); }
-  .cta__k{ font-size:11px; font-weight:600; letter-spacing:.3em; text-transform:uppercase; color:rgba(255,255,255,.7); margin-bottom:20px; }
-  .cta__h{ font-family:var(--display); font-weight:500; font-size:clamp(32px,6vw,60px); line-height:1.06; max-width:16ch; margin:0 auto 22px; }
-  .cta__s{ font-size:clamp(15px,2.2vw,18px); color:rgba(255,255,255,.8); max-width:48ch; margin:0 auto 34px; }
+  .cta__k{ font-size:var(--fs-section); font-weight:700; letter-spacing:.24em; text-transform:uppercase; color:rgba(255,255,255,.72); margin-bottom:20px; }
+  .cta__h{ font-family:var(--display); font-weight:700; font-size:var(--fs-title); line-height:1.07; max-width:16ch; margin:0 auto 22px; }
+  .cta__s{ font-size:var(--fs-subtitle); font-weight:400; color:rgba(255,255,255,.8); max-width:48ch; margin:0 auto 34px; }
   .cta .row{ justify-content:center; }
-  .cta__loc{ margin-top:44px; font-size:12px; letter-spacing:.12em; color:rgba(255,255,255,.5); text-transform:uppercase; }
+  .cta__loc{ margin-top:44px; font-size:clamp(10px,1vw,12px); font-weight:600; letter-spacing:.18em; color:rgba(255,255,255,.5); text-transform:uppercase; }
 
   @media (prefers-reduced-motion: reduce){ *{ animation:none !important; scroll-behavior:auto !important; } .btn:hover{ transform:none; } }
 </style>
