@@ -11,9 +11,12 @@
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Playfair+Display:ital,wght@0,600;0,700;1,700&display=swap" rel="stylesheet" />
 <style>
   :root{
-    --green:#1B4332; --green-2:#2D6A4F; --rust:#BC5A2C;
+    /* Brand palette (Basic Brand Manual): green #006139 primary, orange #C85B1A accent,
+       black, yellow-green #CDD500 + gray #9BAAB0 as secondary support. */
+    --green:#006139; --green-2:#008a53; --rust:#C85B1A;
     --cream:#F3EFE7; --ink:#111111; --white:#fff;
-    --p1:#40916C; --p2:#BC5A2C; --p3:#1B4332;
+    --lime:#CDD500; --gris:#9BAAB0;
+    --p1:#006139; --p2:#C85B1A; --p3:#00351f;
     --display:"Playfair Display", Georgia, serif;
     --sans:"Montserrat",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
     --edge:clamp(20px,6vw,64px);
@@ -49,8 +52,8 @@
     display:flex; align-items:center; justify-content:center; overflow:hidden;
   }
   /* branded fallback so structure reads even before videos load */
-  .panel:nth-child(odd){ background:linear-gradient(160deg,#205140,#16362a 60%,#10281f); }
-  .panel:nth-child(even){ background:linear-gradient(160deg,#2D6A4F,#1B4332 65%,#123326); }
+  .panel:nth-child(odd){ background:linear-gradient(160deg,#0a7a49,#004b2c 60%,#00301b); }
+  .panel:nth-child(even){ background:linear-gradient(160deg,#008a53,#006139 62%,#003a22); }
 
   .panel__stage{ position:relative; width:100%; height:100%; display:flex; align-items:center; justify-content:center; }
   /* .media is the exact box the video fills; the scrim matches it 1:1 so the
@@ -154,7 +157,7 @@
   .btn{ display:inline-flex; align-items:center; justify-content:center; padding:15px 26px; border-radius:999px; font-weight:600; font-size:14px; border:1.5px solid transparent; cursor:pointer; transition:.25s; }
   .btn:hover{ transform:translateY(-2px); }
   .btn--rust{ background:var(--rust); color:#fff; }
-  .btn--rust:hover{ background:#a94e25; }
+  .btn--rust:hover{ background:#a84a15; }
   .btn--ghost{ border-color:rgba(255,255,255,.55); color:#fff; }
   .btn--ghost:hover{ background:rgba(255,255,255,.1); border-color:#fff; }
   .btn--cream{ background:var(--cream); color:var(--green); }

@@ -1,13 +1,13 @@
 <svg viewBox="0 0 1400 781" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Padel39 US expansion, radiating from Texas">
 <style>
   .land{fill:#DBD7CC;stroke:#C6C1B2;stroke-width:1;stroke-linejoin:round}
-  .ring{fill:none;stroke:#BC5A2C;opacity:.08}
-  .pulse{fill:none;stroke:#BC5A2C;transform-box:fill-box;transform-origin:center;animation:pulse 6s ease-out infinite}
+  .ring{fill:none;stroke:#C85B1A;opacity:.08}
+  .pulse{fill:none;stroke:#C85B1A;transform-box:fill-box;transform-origin:center;animation:pulse 6s ease-out infinite}
   .pulse.b{animation-delay:2s}.pulse.c{animation-delay:4s}
   @keyframes pulse{0%{transform:scale(.05);opacity:.34}70%{opacity:.06}100%{transform:scale(1);opacity:0}}
   .pin .dot{transform-box:fill-box;transform-origin:center;transition:transform .2s cubic-bezier(.2,.8,.2,1)}
   .pin .lab{opacity:0;transition:opacity .18s;paint-order:stroke;stroke:#F3EFE7;stroke-width:4px;stroke-linejoin:round;
-            fill:#17130f;font:600 15px "Archivo",system-ui,sans-serif;text-anchor:middle;pointer-events:none}
+            fill:#17130f;font:600 15px "Montserrat",system-ui,sans-serif;text-anchor:middle;pointer-events:none}
   .pin{cursor:pointer}
   .pin:hover .dot{transform:scale(1.4)}
   .pin:hover .lab{opacity:1}
@@ -26,33 +26,33 @@
 <circle class="pulse b" cx="656.9" cy="589.8" r="820" stroke-width="2"/>
 <circle class="pulse c" cx="656.9" cy="589.8" r="820" stroke-width="2"/>
 </g>
-<g class="pin"><circle cx="1127.4" cy="343.3" r="11" fill="#1B4332" opacity="0.14"/><circle class="dot" cx="1127.4" cy="343.3" r="6" fill="#1B4332" stroke="#F3EFE7" stroke-width="2.2"/><text class="lab" x="1127.4" y="328.3">Washington DC</text></g>
-<g class="pin"><circle cx="1263.3" cy="244.5" r="11" fill="#1B4332" opacity="0.14"/><circle class="dot" cx="1263.3" cy="244.5" r="6" fill="#1B4332" stroke="#F3EFE7" stroke-width="2.2"/><text class="lab" x="1263.3" y="229.5">Boston</text></g>
-<g class="pin"><circle cx="261.4" cy="421.3" r="11" fill="#1B4332" opacity="0.14"/><circle class="dot" cx="261.4" cy="421.3" r="6" fill="#1B4332" stroke="#F3EFE7" stroke-width="2.2"/><text class="lab" x="261.4" y="406.3">Las Vegas</text></g>
-<g class="pin"><circle cx="1055.8" cy="718.5" r="11" fill="#1B4332" opacity="0.14"/><circle class="dot" cx="1055.8" cy="718.5" r="6" fill="#1B4332" stroke="#F3EFE7" stroke-width="2.2"/><text class="lab" x="1055.8" y="703.5">Miami</text></g>
-<g class="pin"><circle cx="331.2" cy="499.0" r="11" fill="#1B4332" opacity="0.14"/><circle class="dot" cx="331.2" cy="499.0" r="6" fill="#1B4332" stroke="#F3EFE7" stroke-width="2.2"/><text class="lab" x="331.2" y="484.0">Phoenix</text></g>
-<g class="pin"><circle cx="191.0" cy="481.8" r="11" fill="#1B4332" opacity="0.14"/><circle class="dot" cx="191.0" cy="481.8" r="6" fill="#1B4332" stroke="#F3EFE7" stroke-width="2.2"/><text class="lab" x="191.0" y="466.8">Los Angeles</text></g>
-<g class="pin"><circle cx="98.0" cy="94.6" r="11" fill="#1B4332" opacity="0.14"/><circle class="dot" cx="98.0" cy="94.6" r="6" fill="#1B4332" stroke="#F3EFE7" stroke-width="2.2"/><text class="lab" x="98.0" y="79.6">Seattle</text></g>
-<g class="pin"><circle cx="886.7" cy="258.3" r="11" fill="#1B4332" opacity="0.14"/><circle class="dot" cx="886.7" cy="258.3" r="6" fill="#1B4332" stroke="#F3EFE7" stroke-width="2.2"/><text class="lab" x="886.7" y="243.3">Chicago</text></g>
-<g class="pin"><circle cx="1196.2" cy="291.7" r="11" fill="#1B4332" opacity="0.14"/><circle class="dot" cx="1196.2" cy="291.7" r="6" fill="#1B4332" stroke="#F3EFE7" stroke-width="2.2"/><text class="lab" x="1196.2" y="276.7">New York</text></g>
-<g class="pin"><circle cx="1169.9" cy="313.4" r="11" fill="#1B4332" opacity="0.14"/><circle class="dot" cx="1169.9" cy="313.4" r="6" fill="#1B4332" stroke="#F3EFE7" stroke-width="2.2"/><text class="lab" x="1169.9" y="298.4">Philadelphia</text></g>
-<g class="pin"><circle cx="758.5" cy="169.7" r="11" fill="#1B4332" opacity="0.14"/><circle class="dot" cx="758.5" cy="169.7" r="6" fill="#1B4332" stroke="#F3EFE7" stroke-width="2.2"/><text class="lab" x="758.5" y="154.7">Minneapolis</text></g>
-<g class="pin"><circle cx="728.7" cy="337.6" r="11" fill="#1B4332" opacity="0.14"/><circle class="dot" cx="728.7" cy="337.6" r="6" fill="#1B4332" stroke="#F3EFE7" stroke-width="2.2"/><text class="lab" x="728.7" y="322.6">Kansas City</text></g>
-<g class="pin"><circle cx="335.3" cy="290.2" r="11" fill="#1B4332" opacity="0.14"/><circle class="dot" cx="335.3" cy="290.2" r="6" fill="#1B4332" stroke="#F3EFE7" stroke-width="2.2"/><text class="lab" x="335.3" y="275.2">Salt Lake City</text></g>
-<g class="pin"><circle cx="90.1" cy="154.3" r="11" fill="#1B4332" opacity="0.14"/><circle class="dot" cx="90.1" cy="154.3" r="6" fill="#1B4332" stroke="#F3EFE7" stroke-width="2.2"/><text class="lab" x="90.1" y="139.3">Portland</text></g>
-<g class="pin"><circle cx="1004.2" cy="656.0" r="11" fill="#1B4332" opacity="0.14"/><circle class="dot" cx="1004.2" cy="656.0" r="6" fill="#1B4332" stroke="#F3EFE7" stroke-width="2.2"/><text class="lab" x="1004.2" y="641.0">Tampa</text></g>
-<g class="pin"><circle cx="1091.0" cy="432.4" r="11" fill="#1B4332" opacity="0.14"/><circle class="dot" cx="1091.0" cy="432.4" r="6" fill="#1B4332" stroke="#F3EFE7" stroke-width="2.2"/><text class="lab" x="1091.0" y="417.4">Raleigh</text></g>
-<g class="pin"><circle cx="655.8" cy="592.3" r="13.5" fill="#BC5A2C" opacity="0.14"/><circle class="dot" cx="655.8" cy="592.3" r="8.5" fill="#BC5A2C" stroke="#F3EFE7" stroke-width="2.2"/><text class="lab" x="655.8" y="574.8">S Austin</text></g>
-<g class="pin"><circle cx="678.3" cy="518.1" r="13.5" fill="#BC5A2C" opacity="0.14"/><circle class="dot" cx="678.3" cy="518.1" r="8.5" fill="#BC5A2C" stroke="#F3EFE7" stroke-width="2.2"/><text class="lab" x="678.3" y="500.6">Dallas</text></g>
-<g class="pin"><circle cx="710.8" cy="604.3" r="13.5" fill="#BC5A2C" opacity="0.14"/><circle class="dot" cx="710.8" cy="604.3" r="8.5" fill="#BC5A2C" stroke="#F3EFE7" stroke-width="2.2"/><text class="lab" x="710.8" y="586.8">Houston</text></g>
-<g class="pin"><circle cx="639.8" cy="614.0" r="13.5" fill="#BC5A2C" opacity="0.14"/><circle class="dot" cx="639.8" cy="614.0" r="8.5" fill="#BC5A2C" stroke="#F3EFE7" stroke-width="2.2"/><text class="lab" x="639.8" y="596.5">San Antonio</text></g>
-<g class="pin"><circle cx="1206.9" cy="282.0" r="13.5" fill="#BC5A2C" opacity="0.14"/><circle class="dot" cx="1206.9" cy="282.0" r="8.5" fill="#BC5A2C" stroke="#F3EFE7" stroke-width="2.2"/><text class="lab" x="1206.9" y="264.5">Stamford</text></g>
-<g class="pin"><circle cx="960.3" cy="490.4" r="13.5" fill="#BC5A2C" opacity="0.14"/><circle class="dot" cx="960.3" cy="490.4" r="8.5" fill="#BC5A2C" stroke="#F3EFE7" stroke-width="2.2"/><text class="lab" x="960.3" y="472.9">Atlanta</text></g>
-<g class="pin"><circle cx="906.0" cy="421.6" r="13.5" fill="#BC5A2C" opacity="0.14"/><circle class="dot" cx="906.0" cy="421.6" r="8.5" fill="#BC5A2C" stroke="#F3EFE7" stroke-width="2.2"/><text class="lab" x="906.0" y="404.1">Nashville</text></g>
-<g class="pin"><circle cx="1041.0" cy="448.1" r="13.5" fill="#BC5A2C" opacity="0.14"/><circle class="dot" cx="1041.0" cy="448.1" r="8.5" fill="#BC5A2C" stroke="#F3EFE7" stroke-width="2.2"/><text class="lab" x="1041.0" y="430.6">Charlotte</text></g>
-<g class="pin"><circle cx="492.1" cy="319.4" r="13.5" fill="#BC5A2C" opacity="0.14"/><circle class="dot" cx="492.1" cy="319.4" r="8.5" fill="#BC5A2C" stroke="#F3EFE7" stroke-width="2.2"/><text class="lab" x="492.1" y="301.9">Denver</text></g>
-<g class="pin"><circle cx="215.5" cy="519.8" r="13.5" fill="#BC5A2C" opacity="0.14"/><circle class="dot" cx="215.5" cy="519.8" r="8.5" fill="#BC5A2C" stroke="#F3EFE7" stroke-width="2.2"/><text class="lab" x="215.5" y="502.3">San Diego</text></g>
-<g class="pin"><circle cx="656.7" cy="584.6" r="18" fill="#2D6A4F" opacity="0.14"/><circle class="dot" cx="656.7" cy="584.6" r="13" fill="#2D6A4F" stroke="#F3EFE7" stroke-width="2.2"/><text class="lab" x="656.7" y="562.6">N Austin</text></g>
-<g class="pin"><circle cx="657.6" cy="590.0" r="18" fill="#2D6A4F" opacity="0.14"/><circle class="dot" cx="657.6" cy="590.0" r="13" fill="#2D6A4F" stroke="#F3EFE7" stroke-width="2.2"/><text class="lab" x="657.6" y="568.0">E Austin</text></g>
-<g class="pin"><circle cx="676.0" cy="512.1" r="18" fill="#2D6A4F" opacity="0.14"/><circle class="dot" cx="676.0" cy="512.1" r="13" fill="#2D6A4F" stroke="#F3EFE7" stroke-width="2.2"/><text class="lab" x="676.0" y="490.1">Carrollton</text></g>
+<g class="pin"><circle cx="1127.4" cy="343.3" r="11" fill="#00351f" opacity="0.14"/><circle class="dot" cx="1127.4" cy="343.3" r="6" fill="#00351f" stroke="#F3EFE7" stroke-width="2.2"/><text class="lab" x="1127.4" y="328.3">Washington DC</text></g>
+<g class="pin"><circle cx="1263.3" cy="244.5" r="11" fill="#00351f" opacity="0.14"/><circle class="dot" cx="1263.3" cy="244.5" r="6" fill="#00351f" stroke="#F3EFE7" stroke-width="2.2"/><text class="lab" x="1263.3" y="229.5">Boston</text></g>
+<g class="pin"><circle cx="261.4" cy="421.3" r="11" fill="#00351f" opacity="0.14"/><circle class="dot" cx="261.4" cy="421.3" r="6" fill="#00351f" stroke="#F3EFE7" stroke-width="2.2"/><text class="lab" x="261.4" y="406.3">Las Vegas</text></g>
+<g class="pin"><circle cx="1055.8" cy="718.5" r="11" fill="#00351f" opacity="0.14"/><circle class="dot" cx="1055.8" cy="718.5" r="6" fill="#00351f" stroke="#F3EFE7" stroke-width="2.2"/><text class="lab" x="1055.8" y="703.5">Miami</text></g>
+<g class="pin"><circle cx="331.2" cy="499.0" r="11" fill="#00351f" opacity="0.14"/><circle class="dot" cx="331.2" cy="499.0" r="6" fill="#00351f" stroke="#F3EFE7" stroke-width="2.2"/><text class="lab" x="331.2" y="484.0">Phoenix</text></g>
+<g class="pin"><circle cx="191.0" cy="481.8" r="11" fill="#00351f" opacity="0.14"/><circle class="dot" cx="191.0" cy="481.8" r="6" fill="#00351f" stroke="#F3EFE7" stroke-width="2.2"/><text class="lab" x="191.0" y="466.8">Los Angeles</text></g>
+<g class="pin"><circle cx="98.0" cy="94.6" r="11" fill="#00351f" opacity="0.14"/><circle class="dot" cx="98.0" cy="94.6" r="6" fill="#00351f" stroke="#F3EFE7" stroke-width="2.2"/><text class="lab" x="98.0" y="79.6">Seattle</text></g>
+<g class="pin"><circle cx="886.7" cy="258.3" r="11" fill="#00351f" opacity="0.14"/><circle class="dot" cx="886.7" cy="258.3" r="6" fill="#00351f" stroke="#F3EFE7" stroke-width="2.2"/><text class="lab" x="886.7" y="243.3">Chicago</text></g>
+<g class="pin"><circle cx="1196.2" cy="291.7" r="11" fill="#00351f" opacity="0.14"/><circle class="dot" cx="1196.2" cy="291.7" r="6" fill="#00351f" stroke="#F3EFE7" stroke-width="2.2"/><text class="lab" x="1196.2" y="276.7">New York</text></g>
+<g class="pin"><circle cx="1169.9" cy="313.4" r="11" fill="#00351f" opacity="0.14"/><circle class="dot" cx="1169.9" cy="313.4" r="6" fill="#00351f" stroke="#F3EFE7" stroke-width="2.2"/><text class="lab" x="1169.9" y="298.4">Philadelphia</text></g>
+<g class="pin"><circle cx="758.5" cy="169.7" r="11" fill="#00351f" opacity="0.14"/><circle class="dot" cx="758.5" cy="169.7" r="6" fill="#00351f" stroke="#F3EFE7" stroke-width="2.2"/><text class="lab" x="758.5" y="154.7">Minneapolis</text></g>
+<g class="pin"><circle cx="728.7" cy="337.6" r="11" fill="#00351f" opacity="0.14"/><circle class="dot" cx="728.7" cy="337.6" r="6" fill="#00351f" stroke="#F3EFE7" stroke-width="2.2"/><text class="lab" x="728.7" y="322.6">Kansas City</text></g>
+<g class="pin"><circle cx="335.3" cy="290.2" r="11" fill="#00351f" opacity="0.14"/><circle class="dot" cx="335.3" cy="290.2" r="6" fill="#00351f" stroke="#F3EFE7" stroke-width="2.2"/><text class="lab" x="335.3" y="275.2">Salt Lake City</text></g>
+<g class="pin"><circle cx="90.1" cy="154.3" r="11" fill="#00351f" opacity="0.14"/><circle class="dot" cx="90.1" cy="154.3" r="6" fill="#00351f" stroke="#F3EFE7" stroke-width="2.2"/><text class="lab" x="90.1" y="139.3">Portland</text></g>
+<g class="pin"><circle cx="1004.2" cy="656.0" r="11" fill="#00351f" opacity="0.14"/><circle class="dot" cx="1004.2" cy="656.0" r="6" fill="#00351f" stroke="#F3EFE7" stroke-width="2.2"/><text class="lab" x="1004.2" y="641.0">Tampa</text></g>
+<g class="pin"><circle cx="1091.0" cy="432.4" r="11" fill="#00351f" opacity="0.14"/><circle class="dot" cx="1091.0" cy="432.4" r="6" fill="#00351f" stroke="#F3EFE7" stroke-width="2.2"/><text class="lab" x="1091.0" y="417.4">Raleigh</text></g>
+<g class="pin"><circle cx="655.8" cy="592.3" r="13.5" fill="#C85B1A" opacity="0.14"/><circle class="dot" cx="655.8" cy="592.3" r="8.5" fill="#C85B1A" stroke="#F3EFE7" stroke-width="2.2"/><text class="lab" x="655.8" y="574.8">S Austin</text></g>
+<g class="pin"><circle cx="678.3" cy="518.1" r="13.5" fill="#C85B1A" opacity="0.14"/><circle class="dot" cx="678.3" cy="518.1" r="8.5" fill="#C85B1A" stroke="#F3EFE7" stroke-width="2.2"/><text class="lab" x="678.3" y="500.6">Dallas</text></g>
+<g class="pin"><circle cx="710.8" cy="604.3" r="13.5" fill="#C85B1A" opacity="0.14"/><circle class="dot" cx="710.8" cy="604.3" r="8.5" fill="#C85B1A" stroke="#F3EFE7" stroke-width="2.2"/><text class="lab" x="710.8" y="586.8">Houston</text></g>
+<g class="pin"><circle cx="639.8" cy="614.0" r="13.5" fill="#C85B1A" opacity="0.14"/><circle class="dot" cx="639.8" cy="614.0" r="8.5" fill="#C85B1A" stroke="#F3EFE7" stroke-width="2.2"/><text class="lab" x="639.8" y="596.5">San Antonio</text></g>
+<g class="pin"><circle cx="1206.9" cy="282.0" r="13.5" fill="#C85B1A" opacity="0.14"/><circle class="dot" cx="1206.9" cy="282.0" r="8.5" fill="#C85B1A" stroke="#F3EFE7" stroke-width="2.2"/><text class="lab" x="1206.9" y="264.5">Stamford</text></g>
+<g class="pin"><circle cx="960.3" cy="490.4" r="13.5" fill="#C85B1A" opacity="0.14"/><circle class="dot" cx="960.3" cy="490.4" r="8.5" fill="#C85B1A" stroke="#F3EFE7" stroke-width="2.2"/><text class="lab" x="960.3" y="472.9">Atlanta</text></g>
+<g class="pin"><circle cx="906.0" cy="421.6" r="13.5" fill="#C85B1A" opacity="0.14"/><circle class="dot" cx="906.0" cy="421.6" r="8.5" fill="#C85B1A" stroke="#F3EFE7" stroke-width="2.2"/><text class="lab" x="906.0" y="404.1">Nashville</text></g>
+<g class="pin"><circle cx="1041.0" cy="448.1" r="13.5" fill="#C85B1A" opacity="0.14"/><circle class="dot" cx="1041.0" cy="448.1" r="8.5" fill="#C85B1A" stroke="#F3EFE7" stroke-width="2.2"/><text class="lab" x="1041.0" y="430.6">Charlotte</text></g>
+<g class="pin"><circle cx="492.1" cy="319.4" r="13.5" fill="#C85B1A" opacity="0.14"/><circle class="dot" cx="492.1" cy="319.4" r="8.5" fill="#C85B1A" stroke="#F3EFE7" stroke-width="2.2"/><text class="lab" x="492.1" y="301.9">Denver</text></g>
+<g class="pin"><circle cx="215.5" cy="519.8" r="13.5" fill="#C85B1A" opacity="0.14"/><circle class="dot" cx="215.5" cy="519.8" r="8.5" fill="#C85B1A" stroke="#F3EFE7" stroke-width="2.2"/><text class="lab" x="215.5" y="502.3">San Diego</text></g>
+<g class="pin"><circle cx="656.7" cy="584.6" r="18" fill="#006139" opacity="0.14"/><circle class="dot" cx="656.7" cy="584.6" r="13" fill="#006139" stroke="#F3EFE7" stroke-width="2.2"/><text class="lab" x="656.7" y="562.6">N Austin</text></g>
+<g class="pin"><circle cx="657.6" cy="590.0" r="18" fill="#006139" opacity="0.14"/><circle class="dot" cx="657.6" cy="590.0" r="13" fill="#006139" stroke="#F3EFE7" stroke-width="2.2"/><text class="lab" x="657.6" y="568.0">E Austin</text></g>
+<g class="pin"><circle cx="676.0" cy="512.1" r="18" fill="#006139" opacity="0.14"/><circle class="dot" cx="676.0" cy="512.1" r="13" fill="#006139" stroke="#F3EFE7" stroke-width="2.2"/><text class="lab" x="676.0" y="490.1">Carrollton</text></g>
 </svg>
