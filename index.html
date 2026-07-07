@@ -73,6 +73,12 @@
   }
   .cap .k{ font-size:11px; font-weight:600; letter-spacing:.3em; text-transform:uppercase; color:rgba(255,255,255,.85); }
   .cap .t{ font-family:var(--display); font-weight:500; font-size:clamp(22px,4.4vw,34px); margin-top:8px; text-shadow:0 2px 24px rgba(0,0,0,.4); }
+  /* mobile: lift caption clear of the sound button and make it larger */
+  @media(max-width:640px){
+    .cap{ bottom:calc(env(safe-area-inset-bottom) + 88px); }
+    .cap .k{ font-size:12px; margin-bottom:2px; }
+    .cap .t{ font-size:clamp(28px,7.6vw,36px); font-weight:600; margin-top:10px; text-shadow:0 2px 26px rgba(0,0,0,.55); }
+  }
 
   /* fixed brand + contact link */
   .top{
@@ -109,6 +115,16 @@
     padding:9px 15px; border-radius:999px; font-size:12px; font-weight:600; letter-spacing:.04em;
   }
   .sound:hover{ background:rgba(9,20,15,.6); }
+  .sound__ic{ width:19px; height:19px; display:block; flex:none; }
+  .sound.muted .ic-waves{ display:none; }
+  .sound:not(.muted) .ic-x{ display:none; }
+  /* mobile: icon-only circle, no label, so it never collides with the caption */
+  @media(max-width:640px){
+    .sound{ width:48px; height:48px; padding:0; gap:0; justify-content:center; border-radius:50%;
+            bottom:calc(env(safe-area-inset-bottom) + 16px); background:rgba(9,20,15,.5); }
+    .sound__txt{ display:none; }
+    .sound__ic{ width:23px; height:23px; }
+  }
 
   /* light-ui: when a light (cream) panel is active, flip the fixed chrome to dark */
   body.light-ui .brand{ filter:none; }
@@ -186,8 +202,13 @@
 
 <div class="dots" id="dots" aria-hidden="true"></div>
 
-<button class="sound" id="sound" type="button" aria-label="Toggle sound">
-  <span id="soundIcon">♪</span><span id="soundTxt">Sound on</span>
+<button class="sound muted" id="sound" type="button" aria-label="Toggle sound" aria-pressed="false">
+  <svg class="sound__ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <path d="M11 5 6 9H2v6h4l5 4V5z" fill="currentColor" stroke="none"/>
+    <g class="ic-waves"><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></g>
+    <g class="ic-x"><path d="M23 9l-6 6"/><path d="M17 9l6 6"/></g>
+  </svg>
+  <span id="soundTxt" class="sound__txt">Sound on</span>
 </button>
 
 <main class="reel" id="reel">
@@ -417,11 +438,11 @@
   // start muted (so the clip plays) and unmute on the first user interaction.
   const soundBtn = document.getElementById('sound');
   const soundTxt = document.getElementById('soundTxt');
-  const soundIcon= document.getElementById('soundIcon');
   function applySound(){
     videos.forEach(v => v.muted = muted);
+    soundBtn.classList.toggle('muted', muted);
+    soundBtn.setAttribute('aria-pressed', String(!muted));
     soundTxt.textContent = muted ? 'Sound on' : 'Sound off';
-    soundIcon.textContent = muted ? '♪' : '✕';
     if (!muted){
       const active = panels.find((p,i) => dots[i].classList.contains('on')) || panels[0];
       const v = active && active.querySelector('video.v');
